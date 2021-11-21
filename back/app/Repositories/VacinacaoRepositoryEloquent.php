@@ -13,10 +13,10 @@ class VacinacaoRepositoryEloquent extends RepositoryEloquent implements Vacinaca
     }
 
     public function getVacinacaoByPaciente(int $idPaciente) {
-        return $this->model->select()
+        return $this->model->select('vacinacao.*','vacina.nome as nomeVacina','funcionarios.*')
         ->join('vacina', 'vacina.idVacina', '=', 'vacinacao.idVacina')
-        ->join('pacientes', 'pacientes.idPaciente', '=', 'vacinacao.idPaciente')
-        ->where('idPaciente','=', $idPaciente)
+        ->join('funcionarios', 'funcionarios.idFuncionario', '=', 'vacinacao.idFuncionario')
+        ->where('vacinacao.idPaciente','=', $idPaciente)
         ->get();
     }
 

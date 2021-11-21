@@ -26,5 +26,18 @@ class FuncionarioController extends GenericController {
         }
     }
 
+
+    public function listaPorDiretos() {
+        $data = $this->generic->getFuncionarioDiretor();
+        if(isset($data['error'])){
+            return response()->json($data, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        if ($data) {
+            return response()->json($data, Response::HTTP_OK);
+        } else {
+            return response()->json([], Response::HTTP_OK);
+        }
+    }
+
 }
 

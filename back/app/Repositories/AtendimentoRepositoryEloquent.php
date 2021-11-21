@@ -31,7 +31,7 @@ class AtendimentoRepositoryEloquent extends RepositoryEloquent implements Atendi
             'funcionarios.permissao',
             'funcionarios.idUnidade',
             'funcionarios.telefone as telefoneFuncionario',
-            'funcionarios.cadastroPrefeitura',
+            'funcionarios.cadastroPref',
             'funcionarios.idEndereco as idEnderecoFuncionario',
             'atendimentos.*',
             'especialidades.nome as nomeEspecialidade'
@@ -46,9 +46,10 @@ class AtendimentoRepositoryEloquent extends RepositoryEloquent implements Atendi
     public function getAtendimentoByMedicoDate(int $idFuncionario, string $date)
     {
         return $this->model->select()
-            ->join('funcionarios', 'funcionarios.idFuncionario', '=', 'atendimentos.idFuncionario')
+            ->join('pacientes', 'pacientes.idPaciente', '=', 'atendimentos.idPaciente')
+            ->join('datahoraconsulta', 'datahoraconsulta.idDataHoraConsulta', '=', 'atendimentos.idDataHoraConsulta')
             ->where('atendimentos.idFuncionario', $idFuncionario)
-            ->where('atendimentos.data', $date)
+            ->where('atendimentos.data', '=', $date)
             ->get();
     }
 

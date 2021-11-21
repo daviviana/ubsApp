@@ -13,10 +13,10 @@ class ProcedimentoFeitoRepositoryEloquent extends RepositoryEloquent implements 
     }
 
     public function getProcedimentoByPaciente(int $idPaciente) {
-        return $this->model->select()
+        return $this->model->select('procedimentosfeitos.*','procedimentos.nome as nomeProcedimento','funcionarios.*')
         ->join('procedimentos', 'procedimentos.idProcedimento', '=', 'procedimentosfeitos.idProcedimento')
-        ->join('pacientes', 'pacientes.idPaciente', '=', 'procedimentosfeitos.idPaciente')
-        ->where('idPaciente','=', $idPaciente)
+        ->join('funcionarios', 'funcionarios.idFuncionario', '=', 'procedimentosfeitos.idFuncionario')
+        ->where('procedimentosfeitos.idPaciente','=', $idPaciente)
         ->get();
     }
 

@@ -10,9 +10,9 @@ class ProcedimentoFeitoService extends Service {
         $this->repository = $procedimentoFeito;
     }
 
-    public function getProcedimetnoByPaciente(int $idPaciente) {
+    public function getProcedimentoByPaciente(int $idPaciente) {
 		try {
-			return $this->repository->getProcedimetnoByPaciente($idPaciente);
+			return $this->repository->getProcedimentoByPaciente($idPaciente);
 		} catch (QueryException $e) {
 			return ['error' => $e->getMessage()];
 		}

@@ -18,6 +18,7 @@ class ProcedimentoFeito extends Model
         'data',
         'idProcedimento',
         'idPaciente',
+        'idFuncionario'
     ];
 
     public $timestamps = false;

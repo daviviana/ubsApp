@@ -19,6 +19,7 @@ class Vacinacao extends Model
         'dose',
         'idPaciente',
         'idVacina',
+        'idFuncionario'
     ];
 
     public $timestamps = false;

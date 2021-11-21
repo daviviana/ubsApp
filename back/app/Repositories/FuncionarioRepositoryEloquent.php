@@ -29,4 +29,8 @@ class FuncionarioRepositoryEloquent extends RepositoryEloquent implements Funcio
         return $query->first();
     }
 
+    public function getFuncionarioDiretor() {
+        return $this->model->select('funcionarios.*','unidades.nome as nomeUnidade')->where('cargo','Diretor')->join('unidades', 'unidades.idUnidade', '=', 'funcionarios.idUnidade')->get();
+    }
+
 }

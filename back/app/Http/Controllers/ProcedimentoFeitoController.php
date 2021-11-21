@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\GenericController;
 use App\Services\ProcedimentoFeitoService;
+use Illuminate\Http\Response;
 
 class ProcedimentoFeitoController extends GenericController
 {
@@ -14,7 +15,7 @@ class ProcedimentoFeitoController extends GenericController
     }
 
     public function listaProcedimentoPorPacientes(int $idPaciente) {
-        $data = $this->generic->getProcedimetnoByPaciente($idPaciente);
+        $data = $this->generic->getProcedimentoByPaciente($idPaciente);
         if(isset($data['error'])){
             return response()->json($data, Response::HTTP_INTERNAL_SERVER_ERROR);
         }

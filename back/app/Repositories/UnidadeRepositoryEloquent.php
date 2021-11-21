@@ -12,4 +12,9 @@ class UnidadeRepositoryEloquent extends RepositoryEloquent implements UnidadeRep
         $this->model = $unidade;
     }
 
+    public function list()
+    {
+        return $this->model->select()->join('unidadesenderecos', 'unidadesenderecos.idUnidadeEndereco', '=', 'unidades.idEndereco')->get();
+    }
+
 }

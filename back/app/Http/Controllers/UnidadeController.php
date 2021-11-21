@@ -11,6 +11,5 @@ class UnidadeController extends GenericController {
     {
         $this->generic = $unidadeService;
     }
-
 }
 

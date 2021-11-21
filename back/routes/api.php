@@ -22,6 +22,7 @@ Route::get('auth/logout', 'AuthController@logout');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => '/funcionario'], function () {
         Route::get('/', 'FuncionarioController@list');
+        Route::get('/diretor', 'FuncionarioController@listaPorDiretos');
         Route::get('/{id?}/{cpf?}/{cadastroPrefeitura?}', 'FuncionarioController@get');
         Route::post('/', 'FuncionarioController@create');
         Route::put('/{id}', 'FuncionarioController@update');
@@ -124,7 +125,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('/', 'AtendimentoController@list');
         Route::get('/{id}', 'AtendimentoController@get');
         Route::get('/paciente/{idPaciente}', 'AtendimentoController@listaAtendimentoPorPacientes');
-        Route::get('/medico/{idFuncionario}/{data}', 'AtendimentoController@listaAtendimentoPorPacientes');
+        Route::get('/medico/{idFuncionario}/{data}', 'AtendimentoController@listaAtendimentoPorMedico');
         Route::post('/', 'AtendimentoController@create');
         Route::put('/{id}', 'AtendimentoController@update');
         Route::delete('/{id}', 'AtendimentoController@delete');
@@ -202,7 +203,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('/', 'ProcedimentoFeitoController@list');
         Route::get('/{id}', 'ProcedimentoFeitoController@get');
         Route::post('/', 'ProcedimentoFeitoController@create');
-        Route::get('/paciente/{id}', 'VacinacaoController@listaProcedimentoPorPacientes');
+        Route::get('/paciente/{id}', 'ProcedimentoFeitoController@listaProcedimentoPorPacientes');
         Route::put('/{id}', 'ProcedimentoFeitoController@update');
         Route::delete('/{id}', 'ProcedimentoFeitoController@delete');
     });

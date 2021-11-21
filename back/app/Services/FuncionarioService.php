@@ -21,4 +21,12 @@ class FuncionarioService extends Service
         }
     }
 
+    public function getFuncionarioDiretor(){
+		try {
+			return $this->repository->getFuncionarioDiretor();
+		} catch (QueryException $e) {
+			return ['error' => $e->getMessage()];
+		}
+    }
+
 }
