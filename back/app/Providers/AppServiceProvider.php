@@ -101,12 +101,12 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(
             'App\Repositories\RetiradaRemedioRepositoryInterface',
-            'App\Repositories\RetiradaRemedioConsultaRepositoryEloquent'
+            'App\Repositories\RetiradaRemedioRepositoryEloquent'
         );
 
         $this->app->bind(
             'App\Repositories\VacinaRepositoryInterface',
-            'App\Repositories\VacianaRepositoryEloquent'
+            'App\Repositories\VacinaRepositoryEloquent'
         );
 
         $this->app->bind(
@@ -122,6 +122,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\ProcedimentoFeitoRepositoryInterface',
             'App\Repositories\ProcedimentoFeitoRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\MedicoRepositoryInterface',
+            'App\Repositories\MedicoRepositoryEloquent'
         );
 
     }

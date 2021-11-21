@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Repositories\ProcedimentoRepositoryInterface;
+use App\Repositories\ProcedimentosRepositoryInterface;
 
 class ProcedimentoService extends Service {
 
-    public function __construct(ProcedimentoRepositoryInterface $procedimento){
+    public function __construct(ProcedimentosRepositoryInterface $procedimento){
         $this->repository = $procedimento;
     }
 }

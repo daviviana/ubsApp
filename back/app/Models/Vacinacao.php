@@ -16,6 +16,7 @@ class Vacinacao extends Model
      */
     protected $fillable = [
         'data',
+        'dose',
         'idPaciente',
         'idVacina',
     ];

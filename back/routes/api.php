@@ -90,6 +90,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => '/medicamento'], function () {
         Route::get('/', 'MedicamentoController@list');
         Route::get('/{id}', 'MedicamentoController@get');
+        Route::get('/unidade/{idUnidade}', 'MedicamentoController@listaPorUnidade');
         Route::post('/', 'MedicamentoController@create');
         Route::put('/{id}', 'MedicamentoController@update');
         Route::delete('/{id}', 'MedicamentoController@delete');
@@ -157,6 +158,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => '/dataconsulta'], function () {
         Route::get('/', 'DataHoraConsultaController@list');
         Route::get('/{id}', 'DataHoraConsultaController@get');
+        Route::get('/data/{data}', 'DataHoraConsultaController@listaPorData');
         Route::post('/', 'DataHoraConsultaController@create');
         Route::put('/{id}', 'DataHoraConsultaController@update');
         Route::delete('/{id}', 'DataHoraConsultaController@delete');

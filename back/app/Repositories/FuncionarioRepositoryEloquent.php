@@ -15,7 +15,7 @@ class FuncionarioRepositoryEloquent extends RepositoryEloquent implements Funcio
     public function get(int $id = null, string $cpf = null, string $cadastroPrefeitura = null)
     {
         $query = $this->model->select()
-            ->join('funcionariosenderecos', 'funcionariosenderecos.idEndereco', '=', 'funcionarios.idPaciente');
+            ->join('funcionariosenderecos', 'funcionariosenderecos.idFuncionarioEndereco', '=', 'funcionarios.idEndereco');
         if ($id) {
             $query = $query->where('funcionarios.idFuncionario', $id);
         }
@@ -26,7 +26,7 @@ class FuncionarioRepositoryEloquent extends RepositoryEloquent implements Funcio
         if ($cadastroPrefeitura) {
             $query = $query->where('funcionarios.cadastroPrefeitura', $cadastroPrefeitura);
         }
-        return $query->get();
+        return $query->first();
     }
 
 }

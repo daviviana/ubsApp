@@ -12,4 +12,8 @@ class MedicamentoRepositoryEloquent extends RepositoryEloquent implements Medica
         $this->model = $medicamento;
     }
 
+    public function getMedicamentoUnidade(int $idUnidade) {
+        return $this->model->select()->where('idUnidade',$idUnidade)->get();
+    }
+
 }

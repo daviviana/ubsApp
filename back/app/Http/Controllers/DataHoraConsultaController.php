@@ -13,4 +13,16 @@ class DataHoraConsultaController extends GenericController
         $this->generic = $dataHoraConsultaService;
     }
 
+    public function listaPorData(string $data) {
+        $data = $this->generic->getDataHoraConsultaByDate($data);
+        if(isset($data['error'])){
+            return response()->json($data, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        if ($data) {
+            return response()->json($data, Response::HTTP_OK);
+        } else {
+            return response()->json([], Response::HTTP_OK);
+        }
+    }
+
 }

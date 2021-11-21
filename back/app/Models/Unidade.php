@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unidade extends Model
 {
-    protected $table = 'unidade';
+    protected $table = 'unidades';
     protected $primaryKey = 'idUnidade';
 
     /**

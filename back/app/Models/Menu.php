@@ -15,9 +15,10 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
-       'class',
-       'route',
-       'permissao',
+        'class',
+        'name',
+        'route',
+        'permissao',
     ];
 
     public $timestamps = false;

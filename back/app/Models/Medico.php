@@ -17,6 +17,7 @@ class Medico extends Model
     protected $fillable = [
         'idEspecialidade',
         'credencial',
+        'idFuncionario'
     ];
 
     public $timestamps = false;

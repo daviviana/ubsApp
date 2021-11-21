@@ -41,9 +41,10 @@ class AuthController extends Controller
         }
 
         $user = $this->jwtAuth->authenticate($token);
+        $token = 'Bearer ' . $token;
         $funcionario = $this->funcionarioSrv->get($user['idFuncionario']);
         $menus = $this->menuSrv->getMenusPermissao($funcionario['permissao']);
-        return response()->json(compact('token','menus'));
+        return response()->json(compact('token','menus','funcionario'));
     }
 
     public function refresh()
