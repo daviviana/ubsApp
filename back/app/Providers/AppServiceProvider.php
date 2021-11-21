@@ -84,6 +84,46 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\AtendimentoRepositoryEloquent'
         );
 
+        $this->app->bind(
+            'App\Repositories\EspecialidadeRepositoryInterface',
+            'App\Repositories\EspecialidadeRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\EscalaRepositoryInterface',
+            'App\Repositories\EscalaRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\DataHoraConsultaRepositoryInterface',
+            'App\Repositories\DataHoraConsultaRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\RetiradaRemedioRepositoryInterface',
+            'App\Repositories\RetiradaRemedioConsultaRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\VacinaRepositoryInterface',
+            'App\Repositories\VacianaRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\VacinacaoRepositoryInterface',
+            'App\Repositories\VacinacaoRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\ProcedimentosRepositoryInterface',
+            'App\Repositories\ProcedimentosRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'App\Repositories\ProcedimentoFeitoRepositoryInterface',
+            'App\Repositories\ProcedimentoFeitoRepositoryEloquent'
+        );
+
     }
 
     /* Bootstrap any application services.

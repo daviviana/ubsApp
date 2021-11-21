@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Unidade extends Model
+class ProcedimentoFeito extends Model
 {
-    protected $table = 'unidade';
-    protected $primaryKey = 'idUnidade';
+    protected $table = 'prodecimentosfeitos';
+    protected $primaryKey = 'idProcedimentoFeito';
 
     /**
      * The attributes that are mass assignable.
@@ -15,9 +15,9 @@ class Unidade extends Model
      * @var array
      */
     protected $fillable = [
-        'nome',
-        'idEndereco',
-        'idFuncionario'
+        'data',
+        'idProcedimento',
+        'idPaciente',
     ];
 
     public $timestamps = false;

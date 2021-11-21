@@ -22,7 +22,7 @@ Route::get('auth/logout', 'AuthController@logout');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => '/funcionario'], function () {
         Route::get('/', 'FuncionarioController@list');
-        Route::get('/{id}', 'FuncionarioController@get');
+        Route::get('/{id?}/{cpf?}/{cadastroPrefeitura?}', 'FuncionarioController@get');
         Route::post('/', 'FuncionarioController@create');
         Route::put('/{id}', 'FuncionarioController@update');
         Route::delete('/{id}', 'FuncionarioController@delete');
@@ -38,7 +38,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::group(['prefix' => '/paciente'], function () {
         Route::get('/', 'PacienteController@list');
-        Route::get('/{id}', 'PacienteController@get');
+        Route::get('/{id?}/{cpf?}/{cardSus?}', 'PacienteController@get');
         Route::post('/', 'PacienteController@create');
         Route::put('/{id}', 'PacienteController@update');
         Route::delete('/{id}', 'PacienteController@delete');
@@ -53,12 +53,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     });
 
     Route::group(['prefix' => '/endereco/funcionario'], function () {
-        Route::get('/', 'FuncionariosEnderecosController@list');
-        Route::get('/{id}', 'FuncionariosEnderecosController@get');
-        Route::get('/func/{idFuncionario}', 'FuncionariosEnderecosController@listaPorFuncionario');
-        Route::post('/', 'FuncionariosEnderecosController@create');
-        Route::put('/{id}', 'FuncionariosEnderecosController@update');
-        Route::delete('/{id}', 'FuncionariosEnderecosController@delete');
+        Route::get('/', 'FuncionarioEnderecoController@list');
+        Route::get('/{id}', 'FuncionarioEnderecoController@get');
+        Route::get('/func/{idFuncionario}', 'FuncionarioEnderecoController@listaPorFuncionario');
+        Route::post('/', 'FuncionarioEnderecoController@create');
+        Route::put('/{id}', 'FuncionarioEnderecoController@update');
+        Route::delete('/{id}', 'FuncionarioEnderecoController@delete');
     });
 
     Route::group(['prefix' => '/endereco/paciente'], function () {
@@ -122,6 +122,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => '/atendimento'], function () {
         Route::get('/', 'AtendimentoController@list');
         Route::get('/{id}', 'AtendimentoController@get');
+        Route::get('/paciente/{idPaciente}', 'AtendimentoController@listaAtendimentoPorPacientes');
+        Route::get('/medico/{idFuncionario}/{data}', 'AtendimentoController@listaAtendimentoPorPacientes');
         Route::post('/', 'AtendimentoController@create');
         Route::put('/{id}', 'AtendimentoController@update');
         Route::delete('/{id}', 'AtendimentoController@delete');
@@ -144,5 +146,63 @@ Route::group(['middleware' => 'jwt.auth'], function () {
         Route::delete('/{id}', 'MedicoController@delete');
     });
 
+    Route::group(['prefix' => '/especialidade'], function () {
+        Route::get('/', 'EspecialidadeController@list');
+        Route::get('/{id}', 'EspecialidadeController@get');
+        Route::post('/', 'EspecialidadeController@create');
+        Route::put('/{id}', 'EspecialidadeController@update');
+        Route::delete('/{id}', 'EspecialidadeController@delete');
+    });
+
+    Route::group(['prefix' => '/dataconsulta'], function () {
+        Route::get('/', 'DataHoraConsultaController@list');
+        Route::get('/{id}', 'DataHoraConsultaController@get');
+        Route::post('/', 'DataHoraConsultaController@create');
+        Route::put('/{id}', 'DataHoraConsultaController@update');
+        Route::delete('/{id}', 'DataHoraConsultaController@delete');
+    });
+
+    Route::group(['prefix' => '/retirada'], function () {
+        Route::get('/', 'RetiradaRemedioController@list');
+        Route::get('/{id}', 'RetiradaRemedioController@get');
+        Route::get('/data/{date?}/{idUnidade?}', 'RetiradaRemedioController@listaRemediosPorDataUnidade');
+        Route::post('/', 'RetiradaRemedioController@create');
+        Route::put('/{id}', 'RetiradaRemedioController@update');
+        Route::delete('/{id}', 'RetiradaRemedioController@delete');
+    });
+
+    Route::group(['prefix' => '/vacina'], function () {
+        Route::get('/', 'VacinaController@list');
+        Route::get('/{id}', 'VacinaController@get');
+        Route::post('/', 'VacinaController@create');
+        Route::put('/{id}', 'VacinaController@update');
+        Route::delete('/{id}', 'VacinaController@delete');
+    });
+
+    Route::group(['prefix' => '/vacinacao'], function () {
+        Route::get('/', 'VacinacaoController@list');
+        Route::get('/{id}', 'VacinacaoController@get');
+        Route::get('/paciente/{id}', 'VacinacaoController@listaVacinacaoPorPacientes');
+        Route::post('/', 'VacinacaoController@create');
+        Route::put('/{id}', 'VacinacaoController@update');
+        Route::delete('/{id}', 'VacinacaoController@delete');
+    });
+
+    Route::group(['prefix' => '/procedimento'], function () {
+        Route::get('/', 'ProcedimentoController@list');
+        Route::get('/{id}', 'ProcedimentoController@get');
+        Route::post('/', 'ProcedimentoController@create');
+        Route::put('/{id}', 'ProcedimentoController@update');
+        Route::delete('/{id}', 'ProcedimentoController@delete');
+    });
+
+    Route::group(['prefix' => '/procedimentofeito'], function () {
+        Route::get('/', 'ProcedimentoFeitoController@list');
+        Route::get('/{id}', 'ProcedimentoFeitoController@get');
+        Route::post('/', 'ProcedimentoFeitoController@create');
+        Route::get('/paciente/{id}', 'VacinacaoController@listaProcedimentoPorPacientes');
+        Route::put('/{id}', 'ProcedimentoFeitoController@update');
+        Route::delete('/{id}', 'ProcedimentoFeitoController@delete');
+    });
 
 });

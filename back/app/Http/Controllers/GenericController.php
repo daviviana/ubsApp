@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Validator;
 use Illuminate\Database\QueryException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class GenericController extends Controller {
 
