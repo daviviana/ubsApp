@@ -22,8 +22,9 @@ class Funcionario extends Model
         'permissao',
         'telefone',
         'idUnidade',
-        'cadastroPrefeitura',
-        'idFuncionario'
+        'cadastroPref',
+        'status',
+        'idEndereco'
     ];
 
     public $timestamps = false;

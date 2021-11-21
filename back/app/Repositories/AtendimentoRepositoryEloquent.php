@@ -14,8 +14,32 @@ class AtendimentoRepositoryEloquent extends RepositoryEloquent implements Atendi
 
     public function getAtendimentoByPaciente(int $idPaciente)
     {
-        return $this->model->select()
+        return $this->model->select(
+            'pacientes.idPaciente',
+            'pacientes.nome as nomePaciente',
+            'pacientes.cpf as cpfPaciente',
+            'pacientes.dataNascimento as dataNascimentoPaciente',
+            'pacientes.telefone as telefonePaciente',
+            'pacientes.email as emailPaciente',
+            'pacientes.sus as sus',
+            'pacientes.idEndereco as idEnderecoPaciente',
+            'funcionarios.idFuncionario',
+            'funcionarios.nome as nomeFuncionario',
+            'funcionarios.dataNascimento as dataNascimentoFuncionario',
+            'funcionarios.cargo',
+            'funcionarios.cpf as cpfFuncionario',
+            'funcionarios.permissao',
+            'funcionarios.idUnidade',
+            'funcionarios.telefone as telefoneFuncionario',
+            'funcionarios.cadastroPrefeitura',
+            'funcionarios.idEndereco as idEnderecoFuncionario',
+            'atendimentos.*',
+            'especialidades.nome as nomeEspecialidade'
+        )
             ->join('pacientes', 'pacientes.idPaciente', '=', 'atendimentos.idPaciente')
+            ->join('funcionarios', 'funcionarios.idFuncionario', '=', 'atendimentos.idFuncionario')
+            ->leftjoin('medicos', 'medicos.idFuncionario', '=', 'funcionarios.idFuncionario')
+            ->leftjoin('especialidades', 'especialidades.idEspecialidade', '=', 'medicos.idEspecialidade')
             ->where('atendimentos.idPaciente', $idPaciente)->get();
     }
 

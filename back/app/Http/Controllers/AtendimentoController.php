@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\GenericController;
 use App\Services\AtendimentoService;
+use Illuminate\Http\Response;
 
 class AtendimentoController extends GenericController
 {

@@ -17,8 +17,7 @@ class Atendimento extends Model
     protected $fillable = [
         'idPaciente',
         'idFuncionario',
-        'dataAgendamento',
-        'dataMarcada',
+        'data',
         'statusAtendimento',
         'observacao',
     ];

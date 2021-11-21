@@ -15,7 +15,7 @@ class PacienteRepositoryEloquent extends RepositoryEloquent implements PacienteR
     public function get(int $id = null, string $cpf = null, string $cardSus = null)
     {
         $query = $this->model->select()
-            ->join('pacientesenderecos', 'pacientesenderecos.idEndereco', '=', 'pacientes.idPaciente');
+            ->join('pacientesenderecos', 'pacientesenderecos.idPacienteEndereco', '=', 'pacientes.idEndereco');
         if ($id) {
             $query = $query->where('pacientes.idPaciente', $id);
         }
@@ -26,7 +26,7 @@ class PacienteRepositoryEloquent extends RepositoryEloquent implements PacienteR
         if ($cardSus) {
             $query = $query->where('pacientes.cartaoSus', $cardSus);
         }
-        return $query->get();
+        return $query->first();
     }
 
 }
