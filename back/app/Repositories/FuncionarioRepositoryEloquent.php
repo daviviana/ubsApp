@@ -24,7 +24,7 @@ class FuncionarioRepositoryEloquent extends RepositoryEloquent implements Funcio
             $query = $query->where('funcionarios.cpf', $cpf);
         }
         if ($cadastroPrefeitura) {
-            $query = $query->where('funcionarios.cadastroPrefeitura', $cadastroPrefeitura);
+            $query = $query->where('funcionarios.cadastroPref', $cadastroPrefeitura);
         }
         return $query->first();
     }
