@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\MedicamentoService;
 use App\Http\Controllers\GenericController;
+use Illuminate\Http\Response;
 
 class MedicamentoController extends GenericController {
 

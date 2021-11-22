@@ -20,7 +20,7 @@ class Medicamento extends Model
         'dataChegada',
         'validade',
         'quantidade',
-        'idFornecedor',
+        'fornecedor',
         'idUnidade',
     ];
 

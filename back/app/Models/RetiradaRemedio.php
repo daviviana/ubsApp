@@ -19,6 +19,7 @@ class RetiradaRemedio extends Model
         'idFuncionario',
         'idPaciente',
         'idUnidade',
+        'idMedicamento'
     ];
 
     public $timestamps = false;
