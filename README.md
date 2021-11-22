@@ -31,8 +31,7 @@ cd back
 # Instale as dependências
 $ composer install
  
- # Copie o conteudo da pasta ajuste para /vendor/tymon/src/Middleware
- $ cp ~/ubsApp/ajuste/* ~/ubsApp/back/vendor/tymon/src/Middleware
+ # Execute o arquivo ajuste.sh localizado dentro da pasta config/AjusteTymonJWT
  
 # Execute a aplicação em modo de desenvolvimento
 $ php artisan serve
