@@ -101,7 +101,7 @@ CREATE TABLE `medicamentos` (
     `dataChegada` date DEFAULT NULL,
     `validade` date DEFAULT NULL,
     `quantidade` int(11) DEFAULT NULL,
-    `fornecedor` int(11) DEFAULT NULL,
+    `fornecedor` varchar(200) DEFAULT NULL,
     `idUnidade` int(11) DEFAULT NULL,
     PRIMARY KEY (`idMedicamento`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4;
@@ -308,10 +308,38 @@ INSERT INTO `vacina` (`idVacina`,`nome`) VALUES (1,'Vacina 1');
 INSERT INTO `vacina` (`idVacina`,`nome`) VALUES (2,'Vacina 2');
 INSERT INTO `vacina` (`idVacina`,`nome`) VALUES (3,'Vacina 3');
 
-INSERT INTO `vacinacao` (`idVacinacao`,`data`,`dose`,`idPaciente`,`idVacina`,`idFuncionario`) VALUES (1,'2021-02-11',1,1,1,'11');
-INSERT INTO `vacinacao` (`idVacinacao`,`data`,`dose`,`idPaciente`,`idVacina`,`idFuncionario`) VALUES (2,'2021-08-02',2,2,2,'11');
-INSERT INTO `vacinacao` (`idVacinacao`,`data`,`dose`,`idPaciente`,`idVacina`,`idFuncionario`) VALUES (3,'2021-08-27',2,3,3,'11');
+INSERT INTO `vacinacao` (`idVacinacao`,`data`,`dose`,`idPaciente`,`idVacina`,`idFuncionario`) VALUES (1,'2021-02-11',1,1,1,'10');
+INSERT INTO `vacinacao` (`idVacinacao`,`data`,`dose`,`idPaciente`,`idVacina`,`idFuncionario`) VALUES (2,'2021-08-02',2,2,2,'10');
+INSERT INTO `vacinacao` (`idVacinacao`,`data`,`dose`,`idPaciente`,`idVacina`,`idFuncionario`) VALUES (3,'2021-08-27',2,3,3,'10');
 
 INSERT INTO `procedimentos` (`idProcedimento`,`nome`) VALUES (1,'Procedimento 1');
 INSERT INTO `procedimentos` (`idProcedimento`,`nome`) VALUES (2,'Procedimento 2');
 INSERT INTO `procedimentos` (`idProcedimento`,`nome`) VALUES (3,'Procedimento 3');
+
+INSERT INTO `procedimentosfeitos` (`idProcedimentoFeito`,`data`,`idProcedimento`,`idPaciente`,`idFuncionario`) VALUES (1,'2021-11-17',1,1,10);
+INSERT INTO `procedimentosfeitos` (`idProcedimentoFeito`,`data`,`idProcedimento`,`idPaciente`,`idFuncionario`) VALUES (2,'2021-12-09',2,2,10);
+INSERT INTO `procedimentosfeitos` (`idProcedimentoFeito`,`data`,`idProcedimento`,`idPaciente`,`idFuncionario`) VALUES (3,'2021-11-15',3,3,10);
+
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (1,'2021-11-21','12:00:00',1);
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (2,'2021-11-21','11:00:00',1);
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (3,'2021-11-21','11:30:00',1);
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (4,'2021-11-22','11:30:00',1);
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (5,'2021-11-22','11:40:00',1);
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (6,'2021-11-22','11:30:00',1);
+INSERT INTO `datahoraconsulta` (`idDataHoraConsulta`,`data`,`hora`,`disponivel`) VALUES (7,'2021-11-23','12:00:00',1);
+
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (1,'2021-11-21','1','Paciente calmo',1,6,'1');
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (2,'2021-11-21','1','Paciente irritado',2,7,'2');
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (3,'2021-11-21','1','Paciente sensivel',3,8,'3');
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (4,'2021-11-22','1','Paciente sensivel',3,6,'4');
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (5,'2021-11-22','1','Paciente irritado',2,7,'5');
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (6,'2021-11-22','1','Paciente calmo',1,8,'6');
+INSERT INTO `atendimentos` (`idAtendimento`,`data`,`statusAtendimento`,`observacao`,`idPaciente`,`idFuncionario`,`idDataHoraConsulta`) VALUES (7,'2021-11-23','1','Paciente calmo',1,7,'7');
+
+INSERT INTO `medicamentos` (`idMedicamento`,`nome`,`lote`,`dataChegada`,`validade`,`quantidade`,`fornecedor`,`idUnidade`) VALUES (1,'Medicamento 1','1','2021-08-27','2051-06-06',12,'Fornecedor 1',1);
+INSERT INTO `medicamentos` (`idMedicamento`,`nome`,`lote`,`dataChegada`,`validade`,`quantidade`,`fornecedor`,`idUnidade`) VALUES (2,'Medicamento 2','1','2021-02-11','2052-07-01',31,'Fornecedor 2',1);
+INSERT INTO `medicamentos` (`idMedicamento`,`nome`,`lote`,`dataChegada`,`validade`,`quantidade`,`fornecedor`,`idUnidade`) VALUES (3,'Medicamento 3','1','2021-10-20','2052-09-06',21,'Fornecedor 3',1);
+
+INSERT INTO `retiradaremedio` (`idRetiradaRemedio`,`data`,`idFuncionario`,`idPaciente`,`idUnidade`,`idMedicamento`) VALUES (1,'2021-08-26',11,1,1,1);
+INSERT INTO `retiradaremedio` (`idRetiradaRemedio`,`data`,`idFuncionario`,`idPaciente`,`idUnidade`,`idMedicamento`) VALUES (2,'2021-09-09',11,2,1,2);
+INSERT INTO `retiradaremedio` (`idRetiradaRemedio`,`data`,`idFuncionario`,`idPaciente`,`idUnidade`,`idMedicamento`) VALUES (3,'2021-09-16',11,3,1,3);
