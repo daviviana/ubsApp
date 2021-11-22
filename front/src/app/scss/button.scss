@@ -1,0 +1,13 @@
+button.btn {
+    &:disabled {
+        cursor: default;
+        background-color: #999999;
+        border-color: #999999;
+
+        &:hover {
+            box-shadow: none;
+            background-color: #999999 !important;
+            border-color: #999999 !important;
+        }
+    }
+}

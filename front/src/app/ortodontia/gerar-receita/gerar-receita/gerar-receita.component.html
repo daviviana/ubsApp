@@ -1,0 +1,166 @@
+<div class="container card">
+    <div class="content">
+      <div class="header">
+        <h2>Gerar Receita</h2>
+        <br>
+        <h3>Encontrar Paciente</h3>
+        <form [formGroup]="formPaciente">
+        <div class="row">
+            <div class="col-3">
+              <label>CPF</label>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="cpf" mask="000.000.000-00" />
+                <div class="input-group-addon">
+                  <i class="material-icons icon" style="cursor: pointer;" (click)="pesquisaCPF()">search</i>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-3 offset-1">
+              <label>SUS</label>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="sus" mask="000 0000 0000 0000" />
+                <div class="input-group-addon">
+                  <i class="material-icons icon" style="cursor: pointer;" (click)="pesquisaSUS()">search</i>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-4 offset-1" *ngIf="paciente">
+              <div class="container" *ngIf="!pacienteSelecionado" style="cursor: pointer;" (click)="selecionarPaciente()">
+                <div class="selecionar">
+                  Nome: {{paciente!.nome}} <br>
+                  CPF: {{paciente!.cpf | mask:'000.000.000-00'}} <br>
+                  SUS: {{paciente!.sus | mask:'000 0000 0000 0000'}}
+                </div>
+              </div>
+              <div class="container" *ngIf="pacienteSelecionado" style="background-color: rgb(206, 206, 206);">
+                <div class="selecionar">
+                  Nome: {{paciente!.nome}} <br>
+                  CPF: {{paciente!.cpf | mask:'000.000.000-00'}} <br>
+                  SUS: {{paciente!.sus | mask:'000 0000 0000 0000'}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br>
+        <h3>Dados da Receita</h3>
+        <form [formGroup]="formReceita" (ngSubmit)="gerar()">
+          <div class="row">
+            <div class="col-3">
+              <label>Tipo de receita
+                <span class="text-danger"
+                  *ngIf="formReceita.get('receita')!.errors && formReceita.get('receita')!.hasError('required')">*</span>
+              </label>
+              <select class="form-control" formControlName="receita">
+                <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Informar Tipo</option>
+                <option value="S">Simples</option>
+                <option value="E">Especial</option>
+              </select>
+            </div>
+  
+            <div class="col-3 offset-1">
+              <label>Nome do Medicamento
+                <span class="text-danger"
+                  *ngIf="formReceita.get('nomeMedicamento')!.errors && formReceita.get('nomeMedicamento')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="nomeMedicamento" />
+              <div *ngIf="
+              formReceita.controls.nomeMedicamento.errors && formReceita.controls.nomeMedicamento.touched
+                  ">
+                <small class="text-danger" *ngIf="formReceita.controls.nomeMedicamento.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formReceita.controls.nomeMedicamento.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+  
+            <div class="col-3 offset-1">
+              <label>Dosagem
+                <span class="text-danger"
+                  *ngIf="formReceita.get('dosagem')!.errors && formReceita.get('dosagem')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="dosagem" />
+              <div *ngIf="
+              formReceita.controls.dosagem.errors && formReceita.controls.dosagem.touched
+                  ">
+                <small class="text-danger" *ngIf="formReceita.controls.dosagem.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formReceita.controls.dosagem.errors.minlength">Campo Inválido</small>
+              </div>
+            </div>
+          </div>
+  
+          <br>
+          <div class="row">
+            <div class="col-3">
+              <label>Posologia
+                <span class="text-danger"
+                  *ngIf="formReceita.get('posologia')!.errors && formReceita.get('posologia')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="posologia" />
+              <div *ngIf="formReceita.controls.posologia.errors && formReceita.controls.posologia.touched">
+                <small class="text-danger" *ngIf="formReceita.controls.posologia.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formReceita.controls.posologia.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+  
+            <div class="col-3 offset-1">
+              <label>Forma Farmacêutica
+                <span class="text-danger"
+                  *ngIf="formReceita.get('formaFarmaceutica')!.errors && formReceita.get('formaFarmaceutica')!.hasError('required')">*</span>
+              </label>
+              <select class="form-control" formControlName="formaFarmaceutica">
+                <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Informar Tipo</option>
+                <option value="S">Comprimido</option>
+                <option value="E">Cápsula</option>
+                <option value="E">Drágea</option>
+                <option value="E">Pós</option>
+                <option value="E">Granulado</option>
+                <option value="E">Pomada</option>
+                <option value="E">Creme</option>
+                <option value="E">Gel</option>
+                <option value="E">Pasta</option>
+                <option value="E">Solução</option>
+                <option value="E">Gota</option>
+                <option value="E">Xarope</option>
+                <option value="E">Suspensão</option>
+                <option value="E">Elixir</option>
+              </select>
+              <div *ngIf="
+              formReceita.controls.formaFarmaceutica.errors && formReceita.controls.formaFarmaceutica.touched
+                  ">
+                <small class="text-danger" *ngIf="formReceita.controls.formaFarmaceutica.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formReceita.controls.formaFarmaceutica.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+  
+            <div class="col-3 offset-1">
+              <label>Quantidade
+                <span class="text-danger"
+                  *ngIf="formReceita.get('quantidade')!.errors && formReceita.get('quantidade')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="quantidade" mask="999" />
+              <div *ngIf="
+              formReceita.controls.quantidade.errors && formReceita.controls.quantidade.touched
+                  ">
+                <small class="text-danger" *ngIf="formReceita.controls.quantidade.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formReceita.controls.quantidade.errors.minlength">Campo Inválido</small>
+              </div>
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="col-2 offset-10">
+              <button type="submit" class="btn btn-primary" [disabled]="formReceita.status === 'INVALID'">Gerar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

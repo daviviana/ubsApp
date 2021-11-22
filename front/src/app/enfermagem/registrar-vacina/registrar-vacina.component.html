@@ -1,0 +1,88 @@
+<div class="container card">
+    <div class="content">
+        <div class="header">
+            <h2>Registrar Vacina</h2>
+            <div class="vacina">
+                <div class="form-group">
+                    <form [formGroup]="formVacina">
+                        <div class="row">
+                            <div class="col-3">
+                                <label>CPF</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="cpf"
+                                        mask="000.000.000-00" />
+                                    <div class="input-group-addon">
+                                        <i class="material-icons icon" style="cursor: pointer;"
+                                            (click)="pesquisaCPF()">search</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 offset-1">
+                                <label>SUS</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="sus"
+                                        mask="000 0000 0000 0000" />
+                                    <div class="input-group-addon">
+                                        <i class="material-icons icon" style="cursor: pointer;"
+                                            (click)="pesquisaSUS()">search</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 offset-1" *ngIf="paciente">
+                                <div class="container" *ngIf="!pacienteSelecionado" style="cursor: pointer;"
+                                    (click)="selecionarPaciente()">
+                                    <div class="selecionar">
+                                        Nome: {{paciente!.nome}} <br>
+                                        CPF: {{paciente!.cpf | mask:'000.000.000-00'}} <br>
+                                        SUS: {{paciente!.sus | mask:'000 0000 0000 0000'}}
+                                    </div>
+                                </div>
+                                <div class="container" *ngIf="pacienteSelecionado"
+                                    style="background-color: rgb(206, 206, 206);">
+                                    <div class="selecionar">
+                                        Nome: {{paciente!.nome}} <br>
+                                        CPF: {{paciente!.cpf | mask:'000.000.000-00'}} <br>
+                                        SUS: {{paciente!.sus | mask:'000 0000 0000 0000'}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div *ngIf="pacienteSelecionado">
+            <div class="row">
+                <div class="col-8">
+                    <h3>Historico de vacinas</h3><br>
+                    <div class="tabela">
+                        <div class="tabela-cabecalho">
+                            <div class="tabela-cabecalho-item">Vacina</div>
+                            <div class="tabela-cabecalho-item">Dose</div>
+                            <div class="tabela-cabecalho-item">Data</div>
+                            <div class="tabela-cabecalho-item">Responsavel</div>
+                        </div>
+                        <div class="tabela-linha" *ngFor="let vacinas of listaVacinasPaciente">
+                            <div class="tabela-linha-item">{{vacinas.nomeVacina}}</div>
+                            <div class="tabela-linha-item">{{vacinas.dose}}</div>
+                            <div class="tabela-linha-item">{{vacinas.data}}</div>
+                            <div class="tabela-linha-item">{{vacinas.nome}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offset-1 col-3">
+                    <h3>Selecionar vacina</h3><br>
+                    <div class="tabela">
+                        <div class="tabela-cabecalho">
+                            <div class="tabela-cabecalho-item2">Escolher vacina</div>
+                        </div>
+                        <div class="tabela-linha" *ngFor="let vacinas of listaVacinas">
+                            <div class="tabela-linha-item2">{{vacinas.nome}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

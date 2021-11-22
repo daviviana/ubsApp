@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="content">
+        <div class="container card">
+            <br>
+            <h2 style="text-align: center;">Bem vindo a SGI-UBS</h2>
+            <div class="card-group">
+                <div *ngFor="let noticia of noticias">
+                    <a href="{{ noticia.href }}" style="text-decoration: none">
+                        <div class="card mx-3" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ noticia.img }}" alt="{{ noticia.titlo }}">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ noticia.titlo }}</h5>
+                                <p class="card-text" [innerHTML]="noticia.previa">{{ noticia.previa }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

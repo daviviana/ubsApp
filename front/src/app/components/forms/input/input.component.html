@@ -1,0 +1,34 @@
+<label>
+    <ng-content></ng-content>
+    <span class="text-danger" *ngIf="required">*</span>
+</label>
+<ng-container *ngIf="control">
+    <div class="input-container">
+        <input
+            class="form-control"
+            [type]="type"
+            [formControl]="control"
+            [mask]="mask"
+            [minlength]="minLength"
+            [maxlength]="maxLength"
+            [style.paddingRight]="icon && iconPosition === 'right' ? '30px' : ''"
+            [style.paddingLeft]="icon && iconPosition === 'left' ? '30px' : ''"
+            (ngModelChange)="ngModelChange($event)"
+        />
+        <div class="input-icon" *ngIf="icon">
+            <i
+                class="material-icons icon"
+                [style.right]="iconPosition === 'right' ? '5px' : ''"
+                [style.left]="iconPosition === 'left' ? '5px' : ''"
+                (click)="iconClickEvent($event)"
+            >
+                {{ icon }}
+            </i>
+        </div>
+    </div>
+    <div class="input-error" [class.visible]="error">
+        <small class="text-danger" *ngFor="let error of errors">
+            {{ error }}
+        </small>
+    </div>
+</ng-container>

@@ -1,0 +1,47 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .card {
+        margin: 30px;
+        padding: 25px;
+
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            .row {
+                margin-bottom: 5px;
+            }
+    
+            .input-error {
+                visibility: hidden;
+                height: 21px;
+            }
+        }
+    
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            margin-top: 20px;
+            text-transform: none;
+        }
+    }
+
+    .containerPaciente {
+        border-radius: 5px;
+        border: solid rgb(57, 140, 218);
+    }
+    
+    .selecionar {
+        margin: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

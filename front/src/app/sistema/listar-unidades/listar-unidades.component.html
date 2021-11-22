@@ -1,0 +1,33 @@
+<div class="container card">
+    <div class="content">
+        <div class="header">
+            <h2>Listar Unidades</h2>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="tabela">
+                        <div class="tabela-cabecalho">
+                            <div class="tabela-cabecalho-item">Nome</div>
+                            <div class="tabela-cabecalho-item">Telefone</div>
+                            <div class="tabela-cabecalho-item">E-mail</div>
+                            <div class="tabela-cabecalho-item">Bairro</div>
+                            <div class="tabela-cabecalho-item">Ações</div>
+                        </div>
+                        <div class="tabela-linha" *ngFor="let unidade of listaUnidades">
+                            <div class="tabela-linha-item">{{unidade.nome}}</div>
+                            <div class="tabela-linha-item">{{unidade.telefone}}</div>
+                            <div class="tabela-linha-item">{{unidade.email}}</div>
+                            <div class="tabela-linha-item">{{unidade.bairro}}</div>
+                            <div class="tabela-linha-item">
+                                <i class="material-icons">search</i>
+                                <i class="material-icons">delete_forever</i>
+                                <i class="material-icons">edit</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

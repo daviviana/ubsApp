@@ -1,0 +1,124 @@
+ <div class="container card">
+    <div class="content">
+      <div class="header">
+        <h2>Cadastro de Unidade</h2>
+      </div>
+      <div class="cadastro">
+        <form [formGroup]="formUnidade" (ngSubmit)="enviar()">
+          <h3>Dados da Unidade</h3>
+          <div class="row">
+            <div class="col-6">
+              <label>Nome de Referência
+                <span class="text-danger" *ngIf="required('nome')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="nome" placeholder="Ex: Vila Galvão"/>
+              <div class="input-error" [class.visible]="error('nome')">
+                <small class="text-danger" *ngFor="let error of errors('nome')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+            <!-- <div class="col-4">
+                <label>Selecione o profissional</label>
+                <select class="form-control" formControlName="diretor">
+                    <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Nome - Credencial</option>
+                    <option *ngFor="let diretor of listaDiretores" [ngValue]="diretor.credencial">
+                        {{diretor.nome}} - {{diretor.credencial}}</option>
+                </select>
+            </div> -->
+          </div>
+          <h3>Endereço</h3>
+          <div class="row">
+            <div class="col-2">
+              <label>CEP
+                <span class="text-danger" *ngIf="required('cep')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="cep" mask="00000-000" (ngModelChange)="buscarCep($event)" />
+              <div class="input-error" [class.visible]="error('cep')">
+                <small class="text-danger" *ngFor="let error of errors('cep')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+  
+            <div class="col-5">
+              <label>Cidade
+                <span class="text-danger" *ngIf="required('cidade')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="cidade">
+              <div class="input-error" [class.visible]="error('cidade')">
+                <small class="text-danger" *ngFor="let error of errors('cidade')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+  
+            <div class="col-5">
+              <label>Bairro
+                <span class="text-danger" *ngIf="required('bairro')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="bairro" />
+              <div class="input-error" [class.visible]="error('bairro')">
+                <small class="text-danger" *ngFor="let error of errors('bairro')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-6">
+              <label>Logradouro
+                <span class="text-danger" *ngIf="required('rua')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="rua" />
+              <div class="input-error" [class.visible]="error('rua')">
+                <small class="text-danger" *ngFor="let error of errors('rua')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+  
+            <div class="col-2">
+              <label>Número
+                <span class="text-danger" *ngIf="required('numero')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="numero" />
+              <div class="input-error" [class.visible]="error('numero')">
+                <small class="text-danger" *ngFor="let error of errors('numero')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+  
+            <div class="col-4">
+              <label>Complemento</label>
+              <input type="text" class="form-control" formControlName="complemento" />
+            </div>
+          </div>
+  
+          <h3>Contato</h3>
+  
+          <div class="row">
+  
+            <div class="col-6">
+              <label>Telefone
+                <span class="text-danger" *ngIf="required('telefone')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="telefone" mask="(00)0000-0000" />
+              <div class="input-error" [class.visible]="error('telefone')">
+                <small class="text-danger" *ngFor="let error of errors('telefone')">
+                  {{ error }}
+                </small>
+              </div>
+            </div>
+
+          </div>
+  
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" [disabled]="formUnidade.status === 'INVALID'">Cadastrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

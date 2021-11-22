@@ -1,0 +1,8 @@
+* {
+  font-family: helvetica, "Roboto", sans-serif;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}

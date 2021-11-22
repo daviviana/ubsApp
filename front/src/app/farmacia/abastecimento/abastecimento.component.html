@@ -1,0 +1,98 @@
+<div class="container card">
+    <div class="content">
+      <div class="header">
+        <h2>Abastecimento de medicamentos</h2>
+      </div>
+      <div class="cadastro">
+        <form [formGroup]="formAbastecimento" (ngSubmit)="enviar()">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label>Nome
+                  <span class="text-danger"
+                    *ngIf="formAbastecimento.get('nome')!.errors && formAbastecimento.get('nome')!.hasError('required')">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="nome" />
+                <div *ngIf="
+                formAbastecimento.controls.nome.errors && formAbastecimento.controls.nome.touched
+                  ">
+                  <small class="text-danger" *ngIf="formAbastecimento.controls.nome.errors.required">Este campo é
+                    obrigatório</small>
+                  <small class="text-danger" *ngIf="formAbastecimento.controls.nome.errors.minlength">Nome Inválido</small>
+                </div>
+              </div>
+              <div class="col-6">
+                <label>Fornecedor
+                  <span class="text-danger"
+                    *ngIf="formAbastecimento.get('fornecedor')!.errors && formAbastecimento.get('fornecedor')!.hasError('required')">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="fornecedor" />
+                <div *ngIf="
+                formAbastecimento.controls.fornecedor.errors && formAbastecimento.controls.fornecedor.touched
+                  ">
+                  <small class="text-danger" *ngIf="formAbastecimento.controls.fornecedor.errors.required">Este campo é
+                    obrigatório</small>
+                  <small class="text-danger" *ngIf="formAbastecimento.controls.fornecedor.errors.minlength">Fornecedor Inválido</small>
+                </div>
+              </div>
+            </div>
+          
+  
+          <br />
+          <div class="row">
+            <div class="col-4">
+                <label>Validade
+                  <span class="text-danger"
+                    *ngIf="formAbastecimento.get('validade')!.errors && formAbastecimento.get('validade')!.hasError('required')">*</span>
+                </label>
+                <input type="date" class="form-control" formControlName="validade"
+                  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                <div *ngIf="
+                formAbastecimento.controls.validade.errors && formAbastecimento.controls.validade.touched
+                    ">
+                  <small class="text-danger" *ngIf="formAbastecimento.controls.validade.errors.required">Este campo é
+                    obrigatório</small>
+                  <small class="text-danger" *ngIf="formAbastecimento.controls.validade.errors.minlength">Data
+                    Inválida</small>
+                </div>
+              </div>
+          <div class="col-4">
+            <label>Lote
+              <span class="text-danger"
+                *ngIf="formAbastecimento.get('lote')!.errors && formAbastecimento.get('lote')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="lote" />
+            <div *ngIf="
+            formAbastecimento.controls.lote.errors && formAbastecimento.controls.lote.touched
+              ">
+              <small class="text-danger" *ngIf="formAbastecimento.controls.lote.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formAbastecimento.controls.lote.errors.minlength">Lote Inválido</small>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <label>Quantidade
+              <span class="text-danger"
+                *ngIf="formAbastecimento.get('quantidade')!.errors && formAbastecimento.get('quantidade')!.hasError('required')">*</span>
+            </label>
+            <input type="number" class="form-control" formControlName="quantidade" />
+            <div *ngIf="
+            formAbastecimento.controls.quantidade.errors && formAbastecimento.controls.quantidade.touched
+              ">
+              <small class="text-danger" *ngIf="formAbastecimento.controls.quantidade.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formAbastecimento.controls.quantidade.errors.minlength">Quantidade Inválido</small>
+            </div>
+          </div>
+        </div>
+            
+         
+  
+  
+          <br />
+          <button type="submit" class="btn btn-primary" [disabled]="formAbastecimento.status === 'INVALID'">Cadastrar</button> 
+          </div>
+        </form>
+      </div>
+    </div>

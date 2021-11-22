@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/scss/bootstrap";
+
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+// Core Components
+@import "assets/scss/buttons";
+@import "assets/scss/checkboxes";
+@import "assets/scss/radios";
+@import "assets/scss/forms";
+@import "assets/scss/input-group";
+@import "assets/scss/images";
+@import "assets/scss/navbar";
+@import "assets/scss/alerts";
+@import "assets/scss/type";
+@import "assets/scss/tabs";
+@import "assets/scss/tooltip";
+@import "assets/scss/popover";
+@import "assets/scss/dropdown";
+@import "assets/scss/togglebutton";
+@import "assets/scss/ripples";
+@import "assets/scss/footers";
+@import "assets/scss/sidebar-and-main-panel";
+@import "assets/scss/fixed-plugin";
+@import "assets/scss/tables";
+@import "assets/scss/misc";
+
+@import "assets/scss/cards";
+@import "assets/scss/cards/card-stats";
+@import "assets/scss/cards/card-profile";
+@import "assets/scss/cards/card-plain";
+
+//plugin scss
+@import "assets/scss/plugins/animate";
+@import "assets/scss/plugins/chartist";
+@import "assets/scss/plugins/perfect-scrollbar";
+
+@import "assets/scss/responsive";
+
+@import "assets/scss/angular-modal.scss";
+
+html, body { height: 100%; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+@import "app/scss/shared.scss";
+@import "app/scss/input.scss";
+@import "app/scss/button.scss";

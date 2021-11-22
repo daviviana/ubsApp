@@ -1,0 +1,11 @@
+:host {
+    .input-container {
+        position: relative;
+
+        .icon {
+            position: absolute;
+            top: 7px;
+            pointer-events: none;
+        }
+    }
+}

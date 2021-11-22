@@ -1,0 +1,59 @@
+<div class="container card">
+    <div class="content">
+        <div class="header">
+            <h2>Estoque</h2>
+            <br>
+            <!-- <div class="row">
+                <div class="col-3">
+                    <label>Pesquisar</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Filtrar por medicamento"
+                            [(ngModel)]="pesquisa">
+                    </div>
+                </div>
+            </div> -->
+            <br />
+            <div>
+                <h3>Lista de estoque</h3><br>
+                <div class="row">
+                    <div class="col-12" *ngIf="listaRemedios">
+                        <div class="container">
+                            <br>
+                            <div class="tabela">
+                                <div class="tabela-cabecalho">
+                                    <div class="tabela-cabecalho-item">Nome</div>
+                                    <div class="tabela-cabecalho-item">Fornecedor</div>
+                                    <div class="tabela-cabecalho-item">Lote</div>
+                                    <div class="tabela-cabecalho-item">Quantidade</div>
+                                    <div class="tabela-cabecalho-item">Validade</div>
+                                    <div class="tabela-cabecalho-item">Ações</div>
+
+                                </div>
+                                <div class="tabela-linha" *ngFor="let remedios of listaRemedios">
+                                    <div class="tabela-linha-item">{{remedios.nome}}</div>
+                                    <div class="tabela-linha-item">{{remedios.fornecedor}}</div>
+                                    <div class="tabela-linha-item">{{remedios.lote}}</div>
+                                    <div class="tabela-linha-item">{{remedios.quantidade}}</div>
+                                    <div class="tabela-linha-item">{{remedios.validade}}</div>
+                                    <div class="tabela-linha-item"><i class="material-icons">search</i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tabela">
+                            <div class="tabela-cabecalho">
+                                <div class="tabela-cabecalho-nenhum">Estoque sem medicações cadastradas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

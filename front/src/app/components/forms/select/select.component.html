@@ -1,0 +1,35 @@
+<label>
+    <ng-content></ng-content>
+    <span class="text-danger" *ngIf="required">*</span>
+</label>
+<ng-container *ngIf="control">
+    <div class="input-container">
+        <select
+            class="form-control"
+            [formControl]="control"
+            [style.paddingRight]="icon && iconPosition === 'right' ? '30px' : ''"
+            [style.paddingLeft]="icon && iconPosition === 'left' ? '30px' : ''"
+        >
+            <option *ngIf="placeholder" value="" disabled selected>
+                {{ placeholder }}
+            </option>
+            <option *ngFor="let option of options" [value]="option.value">
+                {{ option.label }}
+            </option>
+        </select>
+        <div class="input-icon" *ngIf="icon">
+            <i
+                class="material-icons icon"
+                [style.right]="iconPosition === 'right' ? '5px' : ''"
+                [style.left]="iconPosition === 'left' ? '5px' : ''"
+            >
+                {{ icon }}
+            </i>
+        </div>
+    </div>
+    <div class="input-error" [class.visible]="error">
+        <small class="text-danger" *ngFor="let error of errors">
+            {{ error }}
+        </small>
+    </div>
+</ng-container>

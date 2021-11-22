@@ -1,0 +1,50 @@
+<div class="container card">
+  <div class="content">
+    <div class="header">
+      <h2>Histórico</h2>
+      <br>
+
+      <div class="row">
+        <div class="col-4">
+          <label>Pesquisar Data</label><br>
+          <ngb-datepicker #d [(ngModel)]="data" (dateSelect)="escolherData($event)" outsideDays="hidden">
+          </ngb-datepicker>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="temRetirada() && dataEscolhida">
+        <div class="col-8 offset-2">
+          <div class="container">
+            <br>
+            <div class="tabela">
+              <div class="tabela-cabecalho">
+                <div class="tabela-cabecalho-item">Paciente</div>
+                <div class="tabela-cabecalho-item">Data</div>
+                <div class="tabela-cabecalho-item">Medicação</div>
+                <div class="tabela-cabecalho-item">Quantidade</div>
+                <div class="tabela-cabecalho-item">Responsável</div>
+              </div>
+              <div class="tabela-linha" *ngFor="let retirada of listaRetiradas">
+                <div class="tabela-linha-item">{{retirada.nomePaciente}}</div>
+                <div class="tabela-linha-item">{{retirada.data}}</div>
+                <div class="tabela-linha-item">{{retirada.nomeMedicamento}}</div>
+                <div class="tabela-linha-item">{{retirada.quantidade}}</div>
+                <div class="tabela-linha-item">{{retirada.nomeFuncionario}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <br>
+      <div class="row" *ngIf="!temRetirada() && dataEscolhida">
+        <div class="col-12">
+          <h3>Retiradas do dia {{dataEscolhida}}</h3><br>
+          <div class="tabela">
+            <div class="tabela-cabecalho">
+              <div class="tabela-cabecalho-nenhum">Sem retiradas disponíveis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,116 @@
+<div class="container card">
+  <div class="content">
+    <div class="header">
+      <h2>Marcar Consulta</h2>
+    </div>
+    <div class="marcar">
+      <h3>Paciente</h3>
+      <div class="form-group">
+        <form [formGroup]="formPaciente">
+          <div class="row">
+            <div class="col-3">
+              <label>CPF</label>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="cpf" mask="000.000.000-00" />
+                <div class="input-group-addon">
+                  <i class="material-icons icon" style="cursor: pointer;" (click)="pesquisaCPF()">search</i>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 offset-1">
+              <label>SUS</label>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="sus" mask="000 0000 0000 0000" />
+                <div class="input-group-addon">
+                  <i class="material-icons icon" style="cursor: pointer;" (click)="pesquisaSUS()">search</i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4 offset-1" *ngIf="(pesquisadoCPF || pesquisadoSUS) && !paciente"><br>
+              <h5 class="text-danger">Nenhum paciente encontrado</h5>
+            </div>
+            <div class="col-4 offset-1" *ngIf="paciente">
+              <div class="containerPaciente" *ngIf="!pacienteSelecionado" style="cursor: pointer;"
+                (click)="selecionarPaciente()">
+                <div class="selecionar">
+                  Nome: {{paciente!.nome}} <br>
+                  CPF: {{paciente!.cpf | mask:'000.000.000-00'}} <br>
+                  SUS: {{paciente!.sus | mask:'000 0000 0000 0000'}}
+                </div>
+              </div>
+              <div class="containerPaciente" *ngIf="pacienteSelecionado" style="background-color: rgb(181, 205, 219);">
+                <div class="selecionar">
+                  Nome: {{paciente!.nome}} <br>
+                  CPF: {{paciente!.cpf | mask:'000.000.000-00'}} <br>
+                  SUS: {{paciente!.sus | mask:'000 0000 0000 0000'}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+        </form>
+      </div>
+    </div>
+    <div *ngIf="pacienteSelecionado">
+      <h3>Especialidade</h3>
+      <br />
+      <form [formGroup]="formConsulta" (ngSubmit)="marcarConsulta()">
+        <div class="row">
+          <div class="col-3">
+            <label>Especialidade</label>
+            <div class="input-group style">
+              <select class="form-control" formControlName="especialidade" (change)="selecionarEspecialidade()">
+                <option [ngValue]="null" [defaultSelected]="true" disabled>Especialidades</option>
+                <option *ngFor="let especialidade of especialidades" [ngValue]="especialidade">
+                  {{ especialidade.nome }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3" *ngIf="listaMedicos">
+            <label>Profissional</label>
+            <div class="input-group style">
+              <select class="form-control" formControlName="medico" (change)="selecionarMedico()">
+                <option [ngValue]="null" [defaultSelected]="true" disabled>Profissional</option>
+                <option *ngFor="let medico of listaMedicos" [ngValue]="medico">
+                  {{ medico.nome }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3" *ngIf="medicoSelecionado">
+            <label>Selecione a data</label>
+            <ngb-datepicker #d (dateSelect)="selecionarData($event)"></ngb-datepicker>
+          </div>
+          <div class="container col-3" *ngIf="dataSelecionada">
+            <div class="selecionar">
+              <div><strong>Horários disponíveis</strong></div><br>
+              <div class=tableLines>
+                <div class=lines style="cursor: pointer;" (click)="selecionarHorario(horario)" *ngFor="let horario of horariosDisponiveis">
+                  <div *ngIf="horario !== horarioSelecionado">
+                    {{horario}}
+                  </div>
+                  <div style="background-color: grey;" *ngIf="horario === horarioSelecionado">
+                    {{horario}}
+                  </div>
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div><br><br>
+        <h3>Comentário</h3>
+        <div class="row">
+          <div class="col-9">
+            <input type="textbox" class="form-control" formControlName="comentario" />
+          </div>
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-primary" [disabled]="formConsulta.status === 'INVALID' || horarioSelecionado === undefined">Marcar</button>
+      </form>
+    </div>
+    <app-modal #modal [modalConfig]="modalConfig">
+    </app-modal>
+  </div>
+</div>

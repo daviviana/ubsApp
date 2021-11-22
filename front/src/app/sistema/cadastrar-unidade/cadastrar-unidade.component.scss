@@ -1,0 +1,31 @@
+:host {
+    .card {
+        padding: 25px;
+
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            .row {
+                margin-bottom: 5px;
+            }
+    
+            .input-error {
+                visibility: hidden;
+                height: 21px;
+            }
+        }
+    
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            margin-top: 20px;
+            text-transform: none;
+        }
+    }
+}

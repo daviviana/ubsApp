@@ -1,0 +1,246 @@
+<div class="container card">
+  <div class="content">
+    <div class="header">
+      <h2>Cadastro de funcionário</h2>
+    </div>
+    <div class="cadastro">
+      <form [formGroup]="formFuncionario" (ngSubmit)="enviar()">
+        <h3>Dados Pessoais</h3>
+        <br />
+        <div class="form-group">
+          <div class="row">
+            <div class="col-5">
+              <label>Nome
+                <span class="text-danger"
+                  *ngIf="formFuncionario.get('nome')!.errors && formFuncionario.get('nome')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="nome" />
+              <div *ngIf="
+                    formFuncionario.controls.nome.errors && formFuncionario.controls.nome.touched
+                  ">
+                <small class="text-danger" *ngIf="formFuncionario.controls.nome.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionario.controls.nome.errors.minlength">Nome Inválido</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+          <div class="col-3">
+            <label>Gênero
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('genero')!.errors && formFuncionario.get('genero')!.hasError('required')">*</span>
+            </label>
+            <select class="form-control" formControlName="genero">
+              <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Informar gênero</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+              <option value="X">Não informar</option>
+            </select>
+            <div *ngIf="
+                    formFuncionario.controls.cpf.errors && formFuncionario.controls.cpf.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.cpf.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.cpf.errors.minlength">Campo Inválido</small>
+            </div>
+          </div>
+          <div class="col-3">
+            <label>Data de Nascimento
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('dataNasc')!.errors && formFuncionario.get('dataNasc')!.hasError('required')">*</span>
+            </label>
+            <input type="date" class="form-control" formControlName="dataNasc"
+              onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+            <div *ngIf="
+                    formFuncionario.controls.dataNasc.errors && formFuncionario.controls.dataNasc.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.dataNasc.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.dataNasc.errors.minlength">Data
+                Inválida</small>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <label>CPF
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('cpf')!.errors && formFuncionario.get('cpf')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="cpf" mask="000.000.000-00" />
+            <div *ngIf="
+                    formFuncionario.controls.cpf.errors && formFuncionario.controls.cpf.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.cpf.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.cpf.errors.minlength">Campo Inválido</small>
+            </div>
+          </div>
+        </div>
+
+
+        <br />
+
+        <h3>Endereço</h3>
+        <br />
+
+        <div class="row">
+          <div class="col-4">
+            <label>Logradouro
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('rua')!.errors && formFuncionario.get('rua')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="rua" />
+            <div *ngIf="
+                    formFuncionario.controls.rua.errors && formFuncionario.controls.rua.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.rua.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.rua.errors.minlength">Campo Inválido</small>
+            </div>
+          </div>
+          <div class="col-3 offset-1">
+            <label>Bairro
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('bairro')!.errors && formFuncionario.get('bairro')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="bairro" />
+            <div *ngIf="
+                    formFuncionario.controls.bairro.errors && formFuncionario.controls.bairro.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.bairro.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.bairro.errors.minlength">Campo Inválido</small>
+            </div>
+          </div>
+
+          <div class="col-2 offset-1">
+            <label>Número
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('numero')!.errors && formFuncionario.get('numero')!.hasError('required')">*</span>
+            </label>
+            <input type="number" class="form-control" formControlName="numero" />
+            <div *ngIf="
+                    formFuncionario.controls.numero.errors && formFuncionario.controls.numero.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.numero.errors.required">Este campo é
+                obrigatório</small>
+            </div>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+          <div class="col-3">
+            <label>Cidade
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('cidade')!.errors && formFuncionario.get('cidade')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="cidade">
+            <div *ngIf="
+                    formFuncionario.controls.cidade.errors && formFuncionario.controls.cidade.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.cidade.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.cidade.errors.minlength">Campo Inválido</small>
+            </div>
+          </div>
+          <div class="col-2 offset-1">
+            <label>CEP
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('cep')!.errors && formFuncionario.get('cep')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="cep" mask="00000-000" />
+            <div *ngIf="
+                    formFuncionario.controls.cep.errors && formFuncionario.controls.cep.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.cep.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.cep.errors.minlength">Campo Inválido</small>
+            </div>
+          </div>
+          <div class="col-4 offset-1">
+            <label>Complemento</label>
+            <input type="text" class="form-control" formControlName="complemento" />
+          </div>
+        </div>
+
+        <br />
+
+        <h3>Contato</h3>
+        <br />
+
+        <div class="row">
+          <div class="col-3">
+            <label>E-mail
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('email')!.errors && formFuncionario.get('email')!.hasError('required')">*</span>
+            </label>
+            <input type="email" class="form-control" formControlName="email" />
+            <div *ngIf="
+                    formFuncionario.controls.email.errors && formFuncionario.controls.email.touched
+                  ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.email.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.email.errors.email">E-mail Inválido</small>
+            </div>
+          </div>
+          <div class="col-3 offset-1">
+            <label>Telefone
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('telefone')!.errors && formFuncionario.get('telefone')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="telefone" mask="(00)0000-0000 || (00)00000-0000" />
+            <div *ngIf="
+                formFuncionario.controls.telefone.errors && formFuncionario.controls.telefone.touched
+              ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.telefone.errors.required">Este campo é
+                obrigatório</small>
+              <small class="text-danger" *ngIf="formFuncionario.controls.telefone.errors.minlength">Telefone
+                Inválido</small>
+            </div>
+          </div>
+        </div>
+        <br />
+        <h3>Especialidade</h3>
+        <br />
+        <div class="row">
+          <div class="col-3">
+            <label>Unidade
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('unidade')!.errors && formFuncionario.get('unidade')!.hasError('required')">*</span>
+            </label>
+            <select class="form-control" formControlName="unidade">
+              <option [disabled]="true" [defaultSelected]="true">Unidade</option>
+              <option *ngFor="let unidade of listaUnidades" [ngValue]="unidade.idUnidade">
+                {{unidade.nome}}</option>
+            </select>
+          </div>
+
+          <div class="col-3">
+            <label>Cadastro prefeitura
+              <span class="text-danger"
+                *ngIf="formFuncionario.get('cadastroPref')!.errors && formFuncionario.get('cadastroPref')!.hasError('required')">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="cadastroPref" />
+            <div *ngIf="
+                formFuncionario.controls.cadastroPref.errors && formFuncionario.controls.cadastroPref.touched
+                ">
+              <small class="text-danger" *ngIf="formFuncionario.controls.cadastroPref.errors.required">Este campo é
+                obrigatório</small>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <button type="submit" class="btn btn-primary"
+          [disabled]="formFuncionario.status === 'INVALID'">Cadastrar</button>
+          
+      </form>
+    </div>
+  </div>
+</div>

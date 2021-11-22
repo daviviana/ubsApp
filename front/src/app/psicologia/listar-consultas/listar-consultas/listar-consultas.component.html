@@ -1,0 +1,60 @@
+<div class="container card">
+  <div class="content">
+    <div class="header">
+      <h2>Pesquisar Consultas</h2>
+      <br>
+
+      <div class="row">
+        <div class="col-4">
+          <label>Pesquisar Data</label><br>
+          <ngb-datepicker #d [(ngModel)]="data" (dateSelect)="escolherData($event)" outsideDays="hidden">
+          </ngb-datepicker>
+        </div>
+      </div>
+      <br><br>
+
+      <div class="row" *ngIf="temConsulta()">
+        <div class="col-12">
+          <h3>Consultas do dia {{dataEscolhida}}</h3>
+          <div class="tabela">
+            <div class="tabela-cabecalho">
+              <div class="tabela-cabecalho-item">Data</div>
+              <div class="tabela-cabecalho-item">Horário</div>
+              <div class="tabela-cabecalho-item">Paciente</div>
+              <div class="tabela-cabecalho-item">Ações</div>
+              <div class="tabela-cabecalho-item">Status</div>
+            </div>
+            <div class="tabela-linha" *ngFor="let consulta of listaConsultas"
+              [hidden]="consulta.data !== dataEscolhida">
+              <div class="tabela-linha-item">{{consulta.data}}</div>
+              <div class="tabela-linha-item">{{consulta.hora}}</div>
+              <div class="tabela-linha-item">{{consulta.nome}}</div>
+              <div class="tabela-linha-item">
+                <i class="material-icons" *ngIf="consulta.statusAtendimento == '1'"
+                  (click)="finalizarConsulta(consulta)">done</i>
+                <i class="material-icons" *ngIf="consulta.statusAtendimento == '1'"
+                  (click)="cancelarConsulta(consulta)">close</i>
+              </div>
+              <div class="tabela-linha-item" *ngIf="consulta.statusAtendimento === '1'">Aguardando</div>
+              <div class="tabela-linha-item" *ngIf="consulta.statusAtendimento === '2'">Concluída</div>
+              <div class="tabela-linha-item" *ngIf="consulta.statusAtendimento === '3'">Ausente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!temConsulta()">
+        <div class="col-12">
+          <h3>Consultas do dia {{dataEscolhida}}</h3>
+          <div class="tabela">
+            <div class="tabela-cabecalho">
+              <div class="tabela-cabecalho-nenhum">Sem consultas disponíveis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-modal #modal [modalConfig]="modalConfig">
+    </app-modal>
+  </div>
+</div>

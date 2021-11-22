@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="content">
+        <div class="header">
+            <h2>Gerenciar Plantões</h2><br>
+            <div class="row">
+                <div class="col-3">
+                    <label>Motivo de ausência programada</label>
+                    <select class="form-control" [(ngModel)]="tipoDeFolga" (change)="limpaEspecialidade()">
+                        <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Ausência</option>
+                        <option value="Férias">Férias</option>
+                        <option value="Feriado">Feriado</option>
+                        <option value="Folga">Folga</option>
+                        <option value="Atestado">Atestado</option>
+                    </select>
+                </div>
+                <div class="col-3" *ngIf="tipoDeFolga && tipoDeFolga !== 'Feriado'">
+                    <label>Especialidade</label>
+                    <select class="form-control" [(ngModel)]="especialidade" (change)="limpaProfissional()">
+                        <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Especialidade</option>
+                        <option value="F">Farmácia</option>
+                        <option value="E">Enfermagem</option>
+                        <option value="M">Medicina</option>
+                        <option value="P">Psicologia</option>
+                    </select>
+                </div>
+                <div class="col-3" *ngIf="especialidade && listaProfissionais">
+                    <label>Selecione o profissional</label>
+                    <select class="form-control" [(ngModel)]="profissionalEscolhido">
+                        <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Nome - Credencial</option>
+                        <option *ngFor="let profissional of listaProfissionais" [ngValue]="profissional">
+                            {{profissional.nome}} - {{profissional.credencial}}</option>
+                    </select>
+                </div>
+            </div><br>
+
+            <div *ngIf="profissionalEscolhido && tipoDeFolga !== 'Folga'">
+                <h4>Definir Datas</h4><br>
+                <div class="row">
+                    <div class="col-4">
+
+                        <ngb-datepicker [minDate]="minDate" #dp navigation="arrows" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+                        </ngb-datepicker>
+
+                        <ng-template #t let-date let-focused="focused">
+                            <span class="custom-day"
+                                  [class.focused]="focused"
+                                  [class.range]="isRange(date)"
+                                  [class.faded]="isHovered(date) || isInside(date)"
+                                  (mouseenter)="hoveredDate = date"
+                                  (mouseleave)="hoveredDate = null">
+                              {{ date.day }}
+                            </span>
+                          </ng-template>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="tipoDeFolga === 'Feriado' || (profissionalEscolhido && tipoDeFolga === 'Folga')">
+                <h4>Definir Data</h4><br>
+                <div class="row">
+                    <div class="col-4">
+                        <ngb-datepicker navigation="arrows" [(ngModel)]="singleDate" [minDate]="minDate" #dp [displayMonths]="2" outsideDays="hidden">
+                        </ngb-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="!singleDate && !toDate" (click)="enviar()">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

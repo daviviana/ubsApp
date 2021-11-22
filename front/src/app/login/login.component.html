@@ -1,0 +1,61 @@
+<div class="header-login-bg">
+  <div class="container">
+    <div id="mds-logo">
+      <img src="assets/img/logo-prefeitura.jpg" />
+    </div>
+    <div id="ubs-logo">
+      <img src="assets/img/logo-sus.png" />
+    </div>
+  </div>
+</div>
+
+<div class="content-login">
+  <div class="container">
+    <div class="card">
+      <h2 class="card-title">
+        Bem vindo ao <br> SGI-UBS 
+        Guarulhos
+      </h2>
+      <div class="card-content">
+        <h4>
+          Se você não é funcionário do sistema único de saúde <a href="https://www.guarulhos.sp.gov.br/categories/saude">clique aqui</a>.
+        </h4>
+      </div>
+    </div>
+
+    <div class="divisory"></div>
+
+    <div class="card">
+      <h3 class="card-title">Faça seu login aqui</h3>
+      <div class="form">
+        <form [formGroup]="loginForm">
+          <div class="input-container">
+            <label for="doc">Código</label>
+            <input
+              class="form-control"
+              id="pass"
+              type="text"
+              formControlName="codFunc"
+              maxlength="12"
+            />
+          </div>
+          <div class="input-container">
+            <label for="pass">Senha</label>
+            <input
+              class="form-control"
+              id="pass"
+              type="password"
+              formControlName="senha"
+              maxlength="20"
+            />
+          </div>
+          <span class="form-error" [class.visible]="formError">
+            Senha inválida, tente novamente
+          </span>
+          
+          <button type="button" class="btn btn-primary" [disabled]="loginForm.status === 'INVALID' || loginForm.value.codFunc.length < 6" (click)="login()">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

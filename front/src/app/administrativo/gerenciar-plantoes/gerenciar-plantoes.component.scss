@@ -1,0 +1,52 @@
+.container {
+    background-color: rgb(255, 255, 255);
+    width: 70;
+    border: 1px solid grey;
+    border-radius: 25px;
+}
+
+.content {
+    height: auto;
+    margin: 30px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+.selecionar {
+    margin: 13px;
+    text-align: center;
+}
+
+.tabela {
+    border-radius: 25px;
+}
+
+.linha {
+    border: 1px solid;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}

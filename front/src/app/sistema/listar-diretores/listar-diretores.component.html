@@ -1,0 +1,33 @@
+<div class="container card">
+    <div class="content">
+        <div class="header">
+            <h2>Listar Diretores</h2>
+
+            <div class="marcar">
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <div class="tabela">
+                        <div class="tabela-cabecalho">
+                            <div class="tabela-cabecalho-item">Nome</div>
+                            <div class="tabela-cabecalho-item">Cadastro Prefeitura</div>
+                            <div class="tabela-cabecalho-item">Unidade</div>
+                            <div class="tabela-cabecalho-item">Ações</div>
+                        </div>
+                        <div class="tabela-linha" *ngFor="let diretor of listaDiretores">
+                            <div class="tabela-linha-item">{{diretor.nome}}</div>
+                            <div class="tabela-linha-item">{{diretor.cadastroPref}}</div>
+                            <div class="tabela-linha-item">{{diretor.nomeUnidade}}</div>
+                            <div class="tabela-linha-item">
+                                <i class="material-icons">search</i>
+                                <i class="material-icons">done</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

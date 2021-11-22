@@ -1,0 +1,355 @@
+<div class="container card">
+  <div class="content">
+    <div class="header">
+      <h2>Encontrar Funcionário</h2>
+      <div>
+        <div class="marcar">
+          <br />
+          <div class="form-group">
+            <form [formGroup]="formFuncionario">
+              <div class="row">
+                <div class="col-3">
+                  <label>CPF</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="cpf" mask="000.000.000-00" />
+                    <div class="input-group-addon">
+                      <i class="material-icons icon" style="cursor: pointer;" (click)="pesquisaCPF()">search</i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3 offset-1">
+                  <label>Cadastro Prefeitura</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" formControlName="cadastroPref" mask="000 0000 0000 0000" />
+                    <div class="input-group-addon">
+                      <i class="material-icons icon" style="cursor: pointer;" (click)="pesquisaPref()">search</i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 offset-1" *ngIf="(pesquisadoCPF || pesquisadoPref) && !funcionario"><br>
+                  <h5 class="text-danger">Nenhum funcionário encontrado</h5>
+                </div>
+                <div class="col-4 offset-1" *ngIf="funcionario">
+                  <div class="containerFuncionario" *ngIf="!funcionarioSelecionado" style="cursor: pointer;"
+                    (click)="selecionarFuncionario()">
+                    <div class="selecionar">
+                      Nome: {{funcionario!.nome}} <br>
+                      Cad. Prefeitura: {{funcionario!.cadastroPref}} <br>
+                      Cargo: {{funcionario!.cargo}}
+                    </div>
+                  </div>
+                  <div class="containerFuncionario" *ngIf="funcionarioSelecionado"
+                    style="background-color: rgb(181, 205, 219);">
+                    <div class="selecionar">
+                      Nome: {{funcionarioSelecionado!.nome}} <br>
+                      Cad. Prefeitura: {{funcionarioSelecionado!.cadastroPref}} <br>
+                      Cargo: {{funcionarioSelecionado!.cargo}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+            </form>
+            <div *ngIf="pesquisadoCPF && formFuncionario.controls.cpf.errors">
+              <small class="text-danger">Este campo é obrigatório</small>
+            </div>
+            <div *ngIf="pesquisadoPref && formFuncionario.controls.sus.errors">
+              <small class="text-danger">Este campo é obrigatório</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="content" *ngIf="funcionarioSelecionado">
+      <div class="header">
+        <h2>Alterar Dados do Funcionário</h2>
+      </div>
+      <div class="cadastro">
+        <form [formGroup]="formFuncionarioEditar" (ngSubmit)="enviar()">
+          <h3>Dados Pessoais</h3>
+          <br />
+          <div class="form-group">
+            <div class="row">
+              <div class="col-5">
+                <label>Nome
+                  <span class="text-danger"
+                    *ngIf="formFuncionarioEditar.get('nome')!.errors && formFuncionarioEditar.get('nome')!.hasError('required')">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="nome" />
+                <div *ngIf="
+                      formFuncionarioEditar.controls.nome.errors && formFuncionarioEditar.controls.nome.touched
+                        ">
+                  <small class="text-danger" *ngIf="formFuncionarioEditar.controls.nome.errors.required">Este campo é
+                    obrigatório</small>
+                  <small class="text-danger" *ngIf="formFuncionarioEditar.controls.nome.errors.minlength">Nome
+                    Inválido</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="col-3">
+              <label>Gênero
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('genero')!.errors && formFuncionarioEditar.get('genero')!.hasError('required')">*</span>
+              </label>
+              <select class="form-control" formControlName="genero">
+                <option [ngValue]="null" [disabled]="true" [defaultSelected]="true">Informar gênero</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+                <option value="X">Não informar</option>
+              </select>
+              <div *ngIf="
+                    formFuncionarioEditar.controls.cpf.errors && formFuncionarioEditar.controls.cpf.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cpf.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cpf.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+            <div class="col-3">
+              <label>Data de Nascimento
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('dataNasc')!.errors && formFuncionarioEditar.get('dataNasc')!.hasError('required')">*</span>
+              </label>
+              <input type="date" class="form-control" formControlName="dataNasc"
+                onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.dataNasc.errors && formFuncionarioEditar.controls.dataNasc.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.dataNasc.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.dataNasc.errors.minlength">Data
+                  Inválida</small>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <label>CPF
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('cpf')!.errors && formFuncionarioEditar.get('cpf')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="cpf" mask="000.000.000-00" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.cpf.errors && formFuncionarioEditar.controls.cpf.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cpf.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cpf.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+          </div>
+
+
+          <br />
+
+          <h3>Endereço</h3>
+          <br />
+
+          <div class="row">
+            <div class="col-4">
+              <label>Logradouro
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('rua')!.errors && formFuncionarioEditar.get('rua')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="rua" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.rua.errors && formFuncionarioEditar.controls.rua.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.rua.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.rua.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+            <div class="col-3 offset-1">
+              <label>Bairro
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('bairro')!.errors && formFuncionarioEditar.get('bairro')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="bairro" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.bairro.errors && formFuncionarioEditar.controls.bairro.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.bairro.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.bairro.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+
+            <div class="col-2 offset-1">
+              <label>Número
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('numero')!.errors && formFuncionarioEditar.get('numero')!.hasError('required')">*</span>
+              </label>
+              <input type="number" class="form-control" formControlName="numero" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.numero.errors && formFuncionarioEditar.controls.numero.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.numero.errors.required">Este campo é
+                  obrigatório</small>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="col-3">
+              <label>Cidade
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('cidade')!.errors && formFuncionarioEditar.get('cidade')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="cidade">
+              <div *ngIf="
+                    formFuncionarioEditar.controls.cidade.errors && formFuncionarioEditar.controls.cidade.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cidade.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cidade.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+            <div class="col-2 offset-1">
+              <label>CEP
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('cep')!.errors && formFuncionarioEditar.get('cep')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="cep" mask="00000-000" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.cep.errors && formFuncionarioEditar.controls.cep.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cep.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cep.errors.minlength">Campo
+                  Inválido</small>
+              </div>
+            </div>
+            <div class="col-4 offset-1">
+              <label>Complemento</label>
+              <input type="text" class="form-control" formControlName="complemento" />
+            </div>
+          </div>
+
+          <br />
+
+          <h3>Contato</h3>
+          <br />
+
+          <div class="row">
+            <div class="col-3">
+              <label>E-mail
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('email')!.errors && formFuncionarioEditar.get('email')!.hasError('required')">*</span>
+              </label>
+              <input type="email" class="form-control" formControlName="email" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.email.errors && formFuncionarioEditar.controls.email.touched
+                        ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.email.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.email.errors.email">E-mail
+                  Inválido</small>
+              </div>
+            </div>
+            <div class="col-3 offset-1">
+              <label>Telefone
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('telefone')!.errors && formFuncionarioEditar.get('telefone')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="telefone"
+                mask="(00)0000-0000 || (00)00000-0000" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.telefone.errors && formFuncionarioEditar.controls.telefone.touched
+                    ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.telefone.errors.required">Este campo é
+                  obrigatório</small>
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.telefone.errors.minlength">Telefone
+                  Inválido</small>
+              </div>
+            </div>
+          </div>
+          <br />
+          <h3>Cargo</h3>
+          <br />
+          <div class="row">
+            <div class="col-3">
+              <label>Unidade
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('unidade')!.errors && formFuncionarioEditar.get('unidade')!.hasError('required')">*</span>
+              </label>
+              <select class="form-control" formControlName="unidade">
+                <option [disabled]="true" [defaultSelected]="true">Unidade</option>
+                <option *ngFor="let unidade of listaUnidades" [ngValue]="unidade.idUnidade">
+                  {{unidade.nome}}</option>
+              </select>
+            </div>
+
+            <div class="col-3 offset-1">
+              <label>Cadastro prefeitura
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('cadastroPref')!.errors && formFuncionarioEditar.get('cadastroPref')!.hasError('required')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="cadastroPref" />
+              <div *ngIf="
+                    formFuncionarioEditar.controls.cadastroPref.errors && formFuncionarioEditar.controls.cadastroPref.touched
+                      ">
+                <small class="text-danger" *ngIf="formFuncionarioEditar.controls.cadastroPref.errors.required">Este
+                  campo é
+                  obrigatório</small>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-3">
+              <label>Área
+                <span class="text-danger"
+                  *ngIf="formFuncionarioEditar.get('cargo')!.errors && formFuncionarioEditar.get('cargo')!.hasError('required')">*</span>
+              </label>
+              <select class="form-control" formControlName="cargo" (change)="limpaCargo()">
+                <option [disabled]="true" [defaultSelected]="true">Informar cargo</option>
+                <option *ngFor="let especialidade of listaEspecialidades" [ngValue]="especialidade">
+                  {{ especialidade.nome }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-3 offset-1"
+              *ngIf="formFuncionarioEditar.value.cargo && (formFuncionarioEditar.value.cargo.nome !== 'Diretoria' && formFuncionarioEditar.value.cargo.nome !== 'Administrativa' && formFuncionarioEditar.value.cargo.nome !== 'Atendente SUS')">
+              <label *ngIf="formFuncionarioEditar.value.cargo.nome === 'Enfermagem'">COREN
+                <span class="text-danger">*</span>
+              </label>
+              <label *ngIf="formFuncionarioEditar.value.cargo.nome === 'Farmacêutica'">CRF
+                <span class="text-danger">*</span>
+              </label>
+              <label *ngIf="formFuncionarioEditar.value.cargo.nome === 'Clínica'">CRM
+                <span class="text-danger">*</span>
+              </label>
+              <label *ngIf="formFuncionarioEditar.value.cargo.nome === 'Psicologia'">CRP
+                <span class="text-danger">*</span>
+              </label>
+              <label *ngIf="formFuncionarioEditar.value.cargo.nome === 'Odontologia'">CRO
+                <span class="text-danger">*</span>
+              </label>
+              <div>
+                <input type="text" class="form-control" formControlName="credencial" />
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary"
+            [disabled]="formFuncionarioEditar.status === 'INVALID'">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+    <app-modal #modal [modalConfig]="modalConfig">
+    </app-modal>
+  </div>
+</div>
