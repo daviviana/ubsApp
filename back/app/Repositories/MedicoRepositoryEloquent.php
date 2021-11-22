@@ -13,7 +13,7 @@ class MedicoRepositoryEloquent extends RepositoryEloquent implements MedicoRepos
     }
 
     public function getMedicoByEspecialidade(int $idEspecialidade) {
-        return $this->model->select()->where('idEspecialidade',$idEspecialidade)->get();
+        return $this->model->select('funcionarios.*')->join('funcionarios.idFuncionario','=','medicos.idFuncionario')->where('idEspecialidade',$idEspecialidade)->get();
     }
 
 }

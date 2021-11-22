@@ -142,7 +142,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => '/medico'], function () {
         Route::get('/', 'MedicoController@list');
         Route::get('/{id}', 'MedicoController@get');
-        Route::get('/especialidade/{idEspecialidade}', 'MedicoController@listaPorEspecialidade');
+        Route::get('/especialidade/{idEspecialidade}', 'MedicoController@listarPorEspecialidade');
         Route::post('/', 'MedicoController@create');
         Route::put('/{id}', 'MedicoController@update');
         Route::delete('/{id}', 'MedicoController@delete');
