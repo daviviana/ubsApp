@@ -33,6 +33,8 @@ $ composer install
  
  # Execute o arquivo ajuste.sh localizado dentro da pasta config/AjusteTymonJWT
  
+ # Renomeie o arquivo .env.ajuste para .env e ajuste com as configurações de sua base
+ 
 # Execute a aplicação em modo de desenvolvimento
 $ php artisan serve
 
